@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:data-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+    <script language="JavaScript" type='text/javascript' src='../navstore/js/jquery-3.4.1.js'></script>
+    <script language="JavaScript" type='text/javascript' src='../navstore/js/knockout-3.5.0.js'></script>
+    <script language="JavaScript" type='text/javascript' src='../navstore/js/shop.js'></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="../navstore/css/some.css" type="text/css" rel="stylesheet">
+
+    <title>Shop</title>
+</head>
+<body>
+<header class="w3-container w3-teal">
+    <div><h2 class="w3-btn" onclick="location.href='/navstore'">NAVSTORE</h2></div>
+    <div><h4 class="w3-btn" onclick="location.href='/navstore/shop'">Go shopping</h4></div>
+</header>
+<div id="cont" class="w3-container" style="display: flex; flex-direction: column; align-items: center">
+    <h2>Product List</h2>
+
+    <table class="w3-table-all w3-hoverable">
+        <thead>
+        <tr class="w3-light-grey">
+            <th>Name</th>
+            <th>Price</th>
+            <th>Buy</th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach: items, wrongGods">
+        <tr>
+            <td data-bind="text:name">Jill</td>
+            <td data-bind="text:price">Smith</td>
+            <td><input class="w3-check" type="checkbox"
+                       data-bind="attr:{value: password}, checked: $parent.desiredProduct">
+                <label>select</label></td>
+        </tr>
+        </tbody>
+        <tbody data-bind="foreach: wrongGoods">
+        <tr id="badGoods" >
+            <td data-bind="text:name">Jill</td>
+            <td data-bind="text:price">Smith</td>
+            <td>Product missing</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="btnBlock">
+    <button class="w3-btn w3-block w3-teal"
+            data-bind="visible: visibleFlagForBuyButton()&desiredProduct().length > 0, click: buy">Buy
+    </button>
+
+    <button class="w3-btn w3-block w3-teal" data-bind="visible: desiredProduct().length > 0, click: toBasket">To Basket</button>
+</div>
+
+</body>
+</html>

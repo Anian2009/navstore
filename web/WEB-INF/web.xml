@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <welcome-file-list>
+        <welcome-file>/navstore/home.html</welcome-file>
+    </welcome-file-list>
+
+    
+    <servlet>
+        <servlet-name>BasketServlet</servlet-name>
+        <servlet-class>app.servlets.BasketServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>BuyServiceServlet</servlet-name>
+        <servlet-class>app.servlets.BuyserviceServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>FailureServlet</servlet-name>
+        <servlet-class>app.servlets.FailureServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ItemsLoaderServlet</servlet-name>
+        <servlet-class>app.servlets.ItemsLoaderServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ShopServlet</servlet-name>
+        <servlet-class>app.servlets.ShopServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SuccessServlet</servlet-name>
+        <servlet-class>app.servlets.SuccessServlet</servlet-class>
+    </servlet>
+
+
+
+    <servlet-mapping>
+        <servlet-name>SuccessServlet</servlet-name>
+        <url-pattern>/shop/success</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ItemsLoaderServlet</servlet-name>
+        <url-pattern>/shop/items</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ShopServlet</servlet-name>
+        <url-pattern>/shop</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>FailureServlet</servlet-name>
+        <url-pattern>/shop/failure</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>BasketServlet</servlet-name>
+        <url-pattern>/shop/basket</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>BuyServiceServlet</servlet-name>
+        <url-pattern>/buyservice</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -1,0 +1,28 @@
+header {
+    display: flex;
+    align-items: center;
+}
+
+img, .w3-table-all{
+    width: 80%;
+    margin-left: 10%;
+}
+
+#cont, .btnBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#badGoods {
+    background: coral;
+}
+
+.btnBlock {
+    width: 50%;
+    margin-left: 25%;
+}
+
+button {
+    margin: 20px 0 0 0;
+}
