@@ -27,14 +27,12 @@ $(document).ready(function () {
         };
     }
 
-
     var Model = function () {
         var self = this;
         this.desiredProduct = [];
         this.items = [];
         this.buyGoods = [];
         this.wrongGoods = [];
-
 
         this.toBasket = function (desiredProduct) {
             $.ajax({
@@ -71,7 +69,6 @@ $(document).ready(function () {
                     }
                 }
             });
-
         };
 
         this.validGoods = function (wrongGoodsPass) {
@@ -103,17 +100,15 @@ $(document).ready(function () {
         };
     };
 
-
-
     var model = new Model();
     ko.applyBindings(new AppViewModel(model));
 
     $.ajax({
-        url: '/navstore/shop/items',
+        url: 'shop/items',
         method: 'GET',
         contentType: "application/json",
         error: function (xhr) {
-            alert(xhr);
+            alert("At the moment, the list of goods is not available");
             console.log(xhr.status+" - "+xhr.message)
         },
         success: function (data) {
@@ -122,12 +117,12 @@ $(document).ready(function () {
 
             // add two non-existent goods
             /*model.items.push({
-                name: "AAAA",
+                name: "non-existent",
                 password: "A66",
                 price: 100.5
             });
             model.items.push({
-                name: "BBB",
+                name: "non-existent",
                 password: "B99",
                 price: 90.5
             });*/

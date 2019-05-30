@@ -34,6 +34,7 @@ public class Servise {
             itemsList = new BufferedReader(new InputStreamReader(input))
                     .lines().collect(Collectors.toList());
         } catch (FileNotFoundException e) {
+            System.err.println("Missing file with product list. Check for file \"/data/items.csv\";");
             e.printStackTrace();
         }
 
