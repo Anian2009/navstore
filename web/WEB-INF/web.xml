@@ -42,31 +42,31 @@
 
     <servlet-mapping>
         <servlet-name>SuccessServlet</servlet-name>
-        <url-pattern>/navstore/shop/success</url-pattern>
+        <url-pattern>/shop/success</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>ItemsLoaderServlet</servlet-name>
-        <url-pattern>/navstore/shop/items</url-pattern>
+        <url-pattern>/shop/items</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>ShopServlet</servlet-name>
-        <url-pattern>/navstore/shop</url-pattern>
+        <url-pattern>/shop</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>FailureServlet</servlet-name>
-        <url-pattern>/navstore/shop/failure</url-pattern>
+        <url-pattern>/shop/failure</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>BasketServlet</servlet-name>
-        <url-pattern>/navstore/shop/basket</url-pattern>
+        <url-pattern>/shop/basket</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>BuyServiceServlet</servlet-name>
-        <url-pattern>/navstore/buyservice</url-pattern>
+        <url-pattern>/buyservice</url-pattern>
     </servlet-mapping>
 </web-app>
