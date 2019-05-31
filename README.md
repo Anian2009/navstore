@@ -1,3 +1,25 @@
+# ** Getting started **
+***
+
+- ### initializing "data/items.csv" file
+
+ After first launch and visiting page "navstore/shop" there are created a file "data/items.csv" which initializing default values
+    Sample:
+
+
+    Anorak,A23,50.5
+    Apron,A85,5.3
+    Baseball cap,B12,5.0
+    Belt,B15,10.2
+    Blouse,B45,12.9
+    Boots,B49,45.3
+    Cardigan,C78,20.4
+    Coat,C98,16.7
+    Dress,D85,65.2
+
+ After that, every 5 minutes the collection of items will be updated from this file.
+ If the file "data / items.csv" is deleted or its contents will be empty collection of goods and this file will be initialized dafault values.
+
 # ** APIdoc for Navstore **
 ***
 
@@ -192,21 +214,3 @@ Response 200 - html page
     </html>
 
 
-# ** Getting started **
-***
-
-- ### Product list is empty
-
-    the file "data/items.csv" is empty. You must fill out the file with a list of goods.
-    Sample:
-
-
-    Anorak,A23,50.5
-    Apron,A85,5.3
-    Baseball cap,B12,5.0
-    Belt,B15,10.2
-    Blouse,B45,12.9
-    Boots,B49,45.3
-    Cardigan,C78,20.4
-    Coat,C98,16.7
-    Dress,D85,65.2

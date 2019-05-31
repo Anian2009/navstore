@@ -36,14 +36,7 @@ public class ItemsLoaderServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        if (!Files.exists(Paths.get(config.getServletContext().getRealPath("data"+File.separator+"items.csv")))){
-            new File(config.getServletContext().getRealPath("data")).mkdir();
-            try {
-                new File(config.getServletContext().getRealPath("data"+File.separator+"items.csv")).createNewFile();
-            } catch (IOException e) {
-                System.err.println("Can not crate file \"data"+File.separator+"items.csv\"");
-            }
-        }
+
         initColllection(config);
         TimerTask timerTask = new TimerTask() {
             @Override
