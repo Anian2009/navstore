@@ -31,8 +31,8 @@
         </thead>
         <tbody data-bind="foreach: items, wrongGods">
         <tr>
-            <td data-bind="text:name">Jill</td>
-            <td data-bind="text:price">Smith</td>
+            <td data-bind="text:name"></td>
+            <td data-bind="text:price"></td>
             <td><input class="w3-check" type="checkbox"
                        data-bind="attr:{value: password}, checked: $parent.desiredProduct">
                 <label>select</label></td>
@@ -40,9 +40,9 @@
         </tbody>
         <tbody data-bind="foreach: wrongGoods">
         <tr id="badGoods" >
-            <td data-bind="text:name">Jill</td>
-            <td data-bind="text:price">Smith</td>
-            <td>Product missing</td>
+            <td data-bind="text:name"></td>
+            <td data-bind="text:price"></td>
+            <td></td>
         </tr>
         </tbody>
     </table>
