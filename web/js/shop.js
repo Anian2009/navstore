@@ -104,7 +104,7 @@ $(document).ready(function () {
     ko.applyBindings(new AppViewModel(model));
 
     $.ajax({
-        url: 'shop/items',
+        url: '/navstore/shop/items',
         method: 'GET',
         contentType: "application/json",
         error: function (xhr) {
