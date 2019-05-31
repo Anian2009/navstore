@@ -40,7 +40,7 @@ public class Servise {
             System.out.println("Missing file with product list. Check for file \""+file+"\";");
         }
         if (itemsList.isEmpty()) {
-            System.out.println("No data in \""+config.getServletContext().getRealPath(file)+"\";");
+            System.out.println("No data in \""+file+"\";");
         } else {
             for (String str:itemsList) {
                 String[] array = str.split(",");
