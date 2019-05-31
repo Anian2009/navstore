@@ -192,7 +192,7 @@ Response 200 - html page
     </html>
 
 
-# ** Exceptional situations **
+# ** Getting started **
 ***
 
 - ### Product list is empty
