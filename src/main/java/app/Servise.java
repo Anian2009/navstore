@@ -30,26 +30,24 @@ public class Servise {
     }
 
     public static void initColllection(ServletConfig config){
-        List<String> itemsList;
-        try {
-            String file = config.getServletContext().getRealPath(File.separator+"data"+File.separator+"items.csv");
+        List<String> itemsList = new ArrayList<>();
+        String file = config.getServletContext().getRealPath(File.separator+"data"+File.separator+"items.csv");
 
+        try {
             itemsList = new BufferedReader(new InputStreamReader(new FileInputStream(file)))
                     .lines().collect(Collectors.toList());
-
-            if (itemsList.isEmpty()) {
-                System.out.println("[EXCEPTIONAL SITUATIONS] - No data in \""+file+"\";");
-
-                itemsList = Collections.singletonList("Anorak,A23,50.5");
-            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Missing file with product list. Check for file \""+file+"\";");
+        }
+        if (itemsList.isEmpty()) {
+            System.out.println("No data in \""+config.getServletContext().getRealPath(file)+"\";");
+        } else {
             for (String str:itemsList) {
                 String[] array = str.split(",");
                 Item item = new Item(array[0],array[1],array[2]);
                 Model.getInstance().addItem(item);
             }
-                Model.refreshInstance();
-        } catch (FileNotFoundException e) {
-            System.out.println("[EXCEPTIONS] - Missing file with product list. Check for file \"/data/items.csv\";");
+            Model.refreshInstance();
         }
     }
 }
