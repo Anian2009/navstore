@@ -154,6 +154,8 @@ Response 200 - html page
     </body>
     </html>
 
+***
+
 - ### Returns the html page with information about the unsuccessful creation of the order
 
 GET `/navstore/shop/failure`
@@ -188,3 +190,23 @@ Response 200 - html page
     
     </body>
     </html>
+
+
+# ** Exceptional situations **
+***
+
+- ### Product list is empty
+
+    the file "data/items.csv" is empty. You must fill out the file with a list of goods.
+    Sample:
+
+
+    Anorak,A23,50.5
+    Apron,A85,5.3
+    Baseball cap,B12,5.0
+    Belt,B15,10.2
+    Blouse,B45,12.9
+    Boots,B49,45.3
+    Cardigan,C78,20.4
+    Coat,C98,16.7
+    Dress,D85,65.2

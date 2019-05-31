@@ -8,7 +8,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +36,14 @@ public class ItemsLoaderServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+        if (!Files.exists(Paths.get(config.getServletContext().getRealPath("data"+File.separator+"items.csv")))){
+            new File(config.getServletContext().getRealPath("data")).mkdir();
+            try {
+                new File(config.getServletContext().getRealPath("data"+File.separator+"items.csv")).createNewFile();
+            } catch (IOException e) {
+                System.err.println("Can not crate file \"data"+File.separator+"items.csv\"");
+            }
+        }
         initColllection(config);
         TimerTask timerTask = new TimerTask() {
             @Override

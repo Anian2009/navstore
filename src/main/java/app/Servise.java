@@ -27,19 +27,25 @@ public class Servise {
     public static void initColllection(ServletConfig config){
         List<String> itemsList = new ArrayList<>();
         try {
-            FileInputStream input = new FileInputStream(config.getServletContext().getRealPath("data"+File.separator+"items.csv"));
+            FileInputStream input = new FileInputStream(config.getServletContext()
+                    .getRealPath(File.separator+"data"+File.separator+"items.csv"));
             itemsList = new BufferedReader(new InputStreamReader(input))
                     .lines().collect(Collectors.toList());
+            if (itemsList.isEmpty()) {
+                System.out.println("No data in \""+config.getServletContext().
+                        getRealPath(File.separator+"data"+File.separator+"items.csv")+"\";");
+            }else{
+                for (String str:itemsList) {
+                    String[] array = str.split(",");
+                    Item item = new Item(array[0],array[1],array[2]);
+                    Model.getInstance().addItem(item);
+                }
+                Model.refreshInstance();
+            }
         } catch (FileNotFoundException e) {
-            System.err.println("Missing file with product list. Check for file \"/data/items.csv\";");
-            e.printStackTrace();
+            System.out.println("*********************************************************************");
+            System.out.println("Missing file with product list. Check for file \"/data/items.csv\";");
+            System.out.println("*********************************************************************");
         }
-
-        for (String str:itemsList) {
-            String[] array = str.split(",");
-            Item item = new Item(array[0],array[1],array[2]);
-            Model.getInstance().addItem(item);
-        }
-        Model.refreshInstance();
     }
 }
