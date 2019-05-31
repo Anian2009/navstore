@@ -59,9 +59,7 @@ public class Servise {
     }
 
     private static List<String> setDefaultValueInItemsFile(String file) throws FileNotFoundException {
-        System.out.println("setDefaultValueInItemsFile start");
         try (FileWriter fileWriter = new FileWriter(file)){
-            System.out.println("WriterWrite");
             fileWriter.write(
                     "Anorak,A23,50.5\n" +
                     "Apron,A85,5.3\n" +
