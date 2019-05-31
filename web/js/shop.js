@@ -37,7 +37,7 @@ $(document).ready(function () {
         this.toBasket = function (desiredProduct) {
             $.ajax({
                 // url: '/navstore/shop/basket?desiredProduct='+desiredProduct,
-                url: './shop/basket?desiredProduct='+desiredProduct,
+                url: 'shop/basket?desiredProduct='+desiredProduct,
                 method: 'GET',
                 contentType: "application/json",
                 error: function (xhr) {

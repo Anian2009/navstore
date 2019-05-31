@@ -25,17 +25,16 @@ public class BuyserviceServlet extends HttpServlet {
 
         if (Servise.validate(req.getParameter("desiredProduct")).isEmpty()) {
             List<String> order = Servise.orderList(goodsArticl);
-            File directory = new File(getServletContext().getRealPath("data/order/"));
+            File directory = new File(getServletContext().getRealPath("data"+File.separator+"order"));
             if (!directory.exists()) {
                 directory.mkdirs();
             }
             int solt = 1;
             synchronized (this) {
-                Path file = Paths.get(getServletContext().getRealPath("/data/order/") +
+                Path file = Paths.get(directory +File.separator+
                         new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_S").format(Calendar.getInstance().getTime()) + ".csv");
                 while (Files.exists(file)){
-                    System.out.println("Fail "+file+" Files.exists="+Files.exists(file));
-                    file = Paths.get(getServletContext().getRealPath("/data/order/") +
+                    file = Paths.get(directory +File.separator+
                             new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_S").format(Calendar.getInstance().getTime()) + "_"+solt+".csv");
                     solt++;
                 }

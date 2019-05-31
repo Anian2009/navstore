@@ -4,10 +4,7 @@ import app.entities.Item;
 import app.model.Model;
 
 import javax.servlet.ServletConfig;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +27,7 @@ public class Servise {
     public static void initColllection(ServletConfig config){
         List<String> itemsList = new ArrayList<>();
         try {
-            FileInputStream input = new FileInputStream(config.getServletContext().getRealPath("/data/items.csv"));
+            FileInputStream input = new FileInputStream(config.getServletContext().getRealPath("data"+File.separator+"items.csv"));
             itemsList = new BufferedReader(new InputStreamReader(input))
                     .lines().collect(Collectors.toList());
         } catch (FileNotFoundException e) {
