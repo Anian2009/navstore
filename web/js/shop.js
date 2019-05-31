@@ -36,7 +36,8 @@ $(document).ready(function () {
 
         this.toBasket = function (desiredProduct) {
             $.ajax({
-                url: '/navstore/shop/basket?desiredProduct='+desiredProduct,
+                // url: '/navstore/shop/basket?desiredProduct='+desiredProduct,
+                url: './shop/basket?desiredProduct='+desiredProduct,
                 method: 'GET',
                 contentType: "application/json",
                 error: function (xhr) {
@@ -51,21 +52,23 @@ $(document).ready(function () {
 
         this.buy = function (desiredProduct) {
             $.ajax({
-                url: "/navstore/buyservice",
+                // url: "/navstore/buyservice",
+                url: "./buyservice",
                 method: "post",
                 data: {
                     "desiredProduct":desiredProduct
                 },
                 error: function(xhr) {
                     if(xhr.status===400){
-                        window.location = "/navstore/shop/failure";
+                        // window.location = "/navstore/shop/failure";
+                        window.location = "./shop/failure";
                     } else{
                         alert(xhr.status+" - "+xhr.message);
                     }
                 },
                 success: function(data, textStatus, xhr) {
                     if(xhr.status ===201){
-                        window.location = "/navstore/shop/success"
+                        window.location = "./shop/success"
                     }
                 }
             });
@@ -104,7 +107,8 @@ $(document).ready(function () {
     ko.applyBindings(new AppViewModel(model));
 
     $.ajax({
-        url: '/navstore/shop/items',
+        // url: '/navstore/shop/items',
+        url: './shop/items',
         method: 'GET',
         contentType: "application/json",
         error: function (xhr) {
