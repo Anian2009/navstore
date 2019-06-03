@@ -5,7 +5,7 @@ header {
 
 img, .w3-table-all{
     width: 80%;
-    margin-left: 10%;
+    margin: auto;
 }
 
 #cont, .btnBlock {
@@ -25,4 +25,22 @@ img, .w3-table-all{
 
 button {
     margin: 20px 0 0 0;
+}
+
+@media (max-width: 540px) {
+
+    img, .w3-table-all {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 320px) {
+    html {
+        width: min-content;
+    }
+
+    .w3-container {
+        padding: 0;
+    }
 }
