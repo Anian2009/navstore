@@ -4,7 +4,9 @@ import app.entities.Item;
 import app.model.Model;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -22,20 +24,20 @@ public class Servise {
     public static List<String> orderList(List<String> articl){
         return Model.getInstance().getList().stream()
                 .filter(item -> articl.contains(item.getPassword()))
-                .map(item -> item.getName()+","+item.getPassword()+","+item.getPrice())
+                .map(item -> item.getName()+", "+item.getPassword()+", "+item.getPrice()+";")
                 .collect(Collectors.toList());
     }
 
     public static void initColllection(ServletConfig config){
         List<String> itemsList = new ArrayList<>();
-        String file = config.getServletContext().getRealPath(File.separator+"data"+File.separator+"items.csv");
+        String file = config.getServletContext().getRealPath("")+".."+File.separator+"data"+File.separator+"items.csv";
 
         if (!Files.exists(Paths.get(file))){
-            new File(config.getServletContext().getRealPath("data")).mkdir();
+            new File(config.getServletContext().getRealPath("")+".."+File.separator+"data").mkdir();
             try {
-                new File(config.getServletContext().getRealPath("data"+File.separator+"items.csv")).createNewFile();
+                new File(file).createNewFile();
             } catch (IOException e) {
-                System.out.println("Can not crate file \"data"+File.separator+"items.csv\"");
+                System.err.println("Can not crate file \"data"+File.separator+"items.csv\"");
             }
         }
 
@@ -44,11 +46,11 @@ public class Servise {
                     .lines().collect(Collectors.toList());
 
         if (itemsList.isEmpty()) {
-            System.out.println("No data in \""+file+"\";");
+            System.err.println("No data in \""+file+"\";");
             itemsList = setDefaultValueInItemsFile(file);
         }
         } catch (FileNotFoundException e) {
-            System.out.println("Missing file with product list. Check for file \""+file+"\";");
+            System.err.println("Missing file with product list. Check for file \""+file+"\";");
         }
         for (String str:itemsList) {
             String[] array = str.split(",");

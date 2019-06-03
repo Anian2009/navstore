@@ -25,17 +25,18 @@ public class BuyserviceServlet extends HttpServlet {
 
         if (Servise.validate(req.getParameter("desiredProduct")).isEmpty()) {
             List<String> order = Servise.orderList(goodsArticl);
-            File directory = new File(getServletContext().getRealPath("data"+File.separator+"order"));
+            File directory = new File(getServletContext().getRealPath("")+
+                    ".."+File.separator+"data"+File.separator+"order"+File.separator);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
             int solt = 1;
             synchronized (this) {
                 Path file = Paths.get(directory +File.separator+
-                        new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_S").format(Calendar.getInstance().getTime()) + ".csv");
+                        new SimpleDateFormat("yyyy_MM_dd HH-mm").format(Calendar.getInstance().getTime()) + ".csv");
                 while (Files.exists(file)){
                     file = Paths.get(directory +File.separator+
-                            new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_S").format(Calendar.getInstance().getTime()) + "_"+solt+".csv");
+                            new SimpleDateFormat("yyyy_MM_dd HH-mm").format(Calendar.getInstance().getTime()) + "_"+solt+".csv");
                     solt++;
                 }
                 try {
