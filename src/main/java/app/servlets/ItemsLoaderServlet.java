@@ -54,6 +54,6 @@ public class ItemsLoaderServlet extends HttpServlet {
                 initColllection(finalDirectoryPath);
             }
         };
-        new Timer().schedule(timerTask, 30000, 30000);
+        new Timer().schedule(timerTask, 300000, 300000);
     }
 }
