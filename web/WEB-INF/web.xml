@@ -3,11 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
     <welcome-file-list>
         <welcome-file>/navstore/home.html</welcome-file>
     </welcome-file-list>
 
-    
     <servlet>
         <servlet-name>BasketServlet</servlet-name>
         <servlet-class>app.servlets.BasketServlet</servlet-class>
@@ -38,8 +38,6 @@
         <servlet-class>app.servlets.SuccessServlet</servlet-class>
     </servlet>
 
-
-
     <servlet-mapping>
         <servlet-name>SuccessServlet</servlet-name>
         <url-pattern>/shop/success</url-pattern>
@@ -69,4 +67,6 @@
         <servlet-name>BuyServiceServlet</servlet-name>
         <url-pattern>/buyservice</url-pattern>
     </servlet-mapping>
+
+
 </web-app>

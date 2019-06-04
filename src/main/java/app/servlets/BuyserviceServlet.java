@@ -25,8 +25,8 @@ public class BuyserviceServlet extends HttpServlet {
 
         if (Servise.validate(req.getParameter("desiredProduct")).isEmpty()) {
             List<String> order = Servise.orderList(goodsArticl);
-            File directory = new File(getServletContext().getRealPath("")+
-                    ".."+File.separator+"data"+File.separator+"order"+File.separator);
+            File directory = new File(Servise.dataDirectoryPath
+                    +File.separator+"order"+File.separator);
             if (!directory.exists()) {
                 directory.mkdirs();
             }

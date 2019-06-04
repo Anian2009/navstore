@@ -8,16 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 import static app.Servise.initColllection;
 
@@ -36,14 +31,29 @@ public class ItemsLoaderServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+        String directoryPath = null;
+        Properties properties = new Properties();
 
-        initColllection(config);
+        try {
+            properties.load(config.getServletContext().getResourceAsStream("config.properties"));
+            directoryPath = properties.getProperty("boot.file.path");
+        } catch (Exception e) {
+            System.err.println("No data in properties file");
+        }
+
+        if (!Files.exists(Paths.get(directoryPath))) {
+            directoryPath = System.getenv("CATALINA_HOME") +
+                    File.separator + "webapps" + File.separator + "data";
+        }
+
+        initColllection(directoryPath);
+        String finalDirectoryPath = directoryPath;
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                initColllection(config);
+                initColllection(finalDirectoryPath);
             }
         };
-        new Timer().schedule(timerTask,300000,300000);
+        new Timer().schedule(timerTask, 300000, 300000);
     }
 }
