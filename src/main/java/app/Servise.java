@@ -56,7 +56,8 @@ public class Servise {
             }
         } catch (FileNotFoundException e) {
             System.err.println("Missing file with product list. Check for file \""
-                    + dataDirectoryPath + File.separator + ITEMS_FILE + "\";");
+                    + dataDirectoryPath + File.separator + ITEMS_FILE + "\". " +
+                    "Or change the data directory as described in README file");
         }
         for (String str : itemsList) {
             try {
