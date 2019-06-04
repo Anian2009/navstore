@@ -38,7 +38,7 @@ public class ItemsLoaderServlet extends HttpServlet {
             properties.load(config.getServletContext().getResourceAsStream("config.properties"));
             directoryPath = properties.getProperty("boot.file.path");
         } catch (Exception e) {
-            System.err.println("No data in properties file");
+            System.err.println("No data in properties file.");
         }
 
         if (!Files.exists(Paths.get(directoryPath))) {
@@ -54,6 +54,6 @@ public class ItemsLoaderServlet extends HttpServlet {
                 initColllection(finalDirectoryPath);
             }
         };
-        new Timer().schedule(timerTask, 300000, 300000);
+        new Timer().schedule(timerTask, 30000, 30000);
     }
 }

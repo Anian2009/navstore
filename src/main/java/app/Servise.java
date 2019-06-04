@@ -35,10 +35,13 @@ public class Servise {
 
         if (!Files.exists(Paths.get(dataDirectoryPath)))
             new File(dataDirectoryPath).mkdir();
-        try {
-            new File(dataDirectoryPath + File.separator + ITEMS_FILE).createNewFile();
-        } catch (IOException e) {
-            System.err.println("Can not crate file " + dataDirectoryPath + File.separator + ITEMS_FILE);
+        if (!Files.exists(Paths.get(dataDirectoryPath + File.separator + ITEMS_FILE))){
+            try {
+                new File(dataDirectoryPath + File.separator + ITEMS_FILE).createNewFile();
+            } catch (IOException e) {
+                System.err.println("Can not crate file " + dataDirectoryPath + File.separator + ITEMS_FILE+". " +
+                        "Please create it yourself");
+            }
         }
 
         try {
@@ -47,7 +50,8 @@ public class Servise {
                     .lines().collect(Collectors.toList());
 
             if (itemsList.isEmpty()) {
-                System.err.println("No data in \"" + directory + File.separator + "items.csv" + "\";");
+                System.err.println("No data in \"" + directory + File.separator + "items.csv" + "\". " +
+                        "The file is initialized by default");
                 itemsList = setDefaultValueInItemsFile(dataDirectoryPath + File.separator + ITEMS_FILE);
             }
         } catch (FileNotFoundException e) {
@@ -55,9 +59,14 @@ public class Servise {
                     + dataDirectoryPath + File.separator + ITEMS_FILE + "\";");
         }
         for (String str : itemsList) {
-            String[] array = str.split(",");
-            Item item = new Item(array[0], array[1], array[2]);
-            Model.getInstance().addItem(item);
+            try {
+                String[] array = str.split(",");
+                Item item = new Item(array[0], array[1], array[2]);
+                Model.getInstance().addItem(item);
+            }catch (IndexOutOfBoundsException ex){
+                System.err.println("Invalid data in the \"items.csv\" file. Example of the correct data see In the README file.");
+            }
+
         }
         Model.refreshInstance();
     }

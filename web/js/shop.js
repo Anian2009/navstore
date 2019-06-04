@@ -52,7 +52,6 @@ $(document).ready(function () {
 
         this.buy = function (desiredProduct) {
             $.ajax({
-                // url: "/navstore/buyservice",
                 url: "./buyservice",
                 method: "post",
                 data: {
@@ -60,7 +59,6 @@ $(document).ready(function () {
                 },
                 error: function(xhr) {
                     if(xhr.status===400){
-                        // window.location = "/navstore/shop/failure";
                         window.location = "./shop/failure";
                     } else{
                         alert(xhr.status+" - "+xhr.message);
@@ -107,29 +105,17 @@ $(document).ready(function () {
     ko.applyBindings(new AppViewModel(model));
 
     $.ajax({
-        // url: '/navstore/shop/items',
         url: './shop/items',
         method: 'GET',
         contentType: "application/json",
         error: function (xhr) {
-            alert("At the moment, the list of goods is not available");
             console.log(xhr.status+" - "+xhr.message)
+            window.location = "./shop/failure";
         },
         success: function (data) {
             model.wrongGoods = [];
             model.items = data;
 
-            // add two non-existent goods
-            /*model.items.push({
-                name: "non-existent",
-                password: "A66",
-                price: 100.5
-            });
-            model.items.push({
-                name: "non-existent",
-                password: "B99",
-                price: 90.5
-            });*/
             initialize();
         }
     });

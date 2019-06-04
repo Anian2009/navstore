@@ -1,6 +1,20 @@
 # ** Getting started **
 ***
 
+- ### Changing data directory
+
+By default, the directory of data for your application is located at the root of the server "%Tomcat%\webapps\". You may change this directory.
+
+ To change the data directory, follow these steps:
+ - create a directory in the path that you want;
+ - in the file "navstore.properties" at the root of the application you should write new directory. For example:
+
+
+    boot.file.path=c:\\My\\new\\directory
+
+ - create file "items.csv" in your directory and fill it data;
+ - restart your application;
+
 - ### initializing "data/items.csv" file
 
  After first launch and visiting page "navstore/shop" there are created a file "data/items.csv" which initializing default values
@@ -19,6 +33,7 @@
 
  After that, every 5 minutes the collection of items will be updated from this file.
  If the file "data / items.csv" is deleted or its contents will be empty collection of goods and this file will be initialized dafault values.
+
 
 # ** APIdoc for Navstore **
 ***
