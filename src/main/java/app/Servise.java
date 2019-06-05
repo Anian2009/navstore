@@ -3,11 +3,16 @@ package app;
 import app.entities.Item;
 import app.model.Model;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,11 +40,11 @@ public class Servise {
 
         if (!Files.exists(Paths.get(dataDirectoryPath)))
             new File(dataDirectoryPath).mkdir();
-        if (!Files.exists(Paths.get(dataDirectoryPath + File.separator + ITEMS_FILE))){
+        if (!Files.exists(Paths.get(dataDirectoryPath + File.separator + ITEMS_FILE))) {
             try {
                 new File(dataDirectoryPath + File.separator + ITEMS_FILE).createNewFile();
             } catch (IOException e) {
-                System.err.println("Cannot create file " + dataDirectoryPath + File.separator + ITEMS_FILE+". " +
+                System.err.println("Cannot create file " + dataDirectoryPath + File.separator + ITEMS_FILE + ". " +
                         "No access.  Please create it yourself.");
             }
         }
@@ -64,7 +69,7 @@ public class Servise {
                 String[] array = str.split(",");
                 Item item = new Item(array[0], array[1], array[2]);
                 Model.getInstance().addItem(item);
-            }catch (IndexOutOfBoundsException ex){
+            } catch (IndexOutOfBoundsException ex) {
                 System.err.println("Invalid data in the \"items.csv\" file. Example of the correct data see In the README file.");
             }
 
@@ -89,5 +94,30 @@ public class Servise {
         }
         return new BufferedReader(new InputStreamReader(new FileInputStream(file)))
                 .lines().collect(Collectors.toList());
+    }
+
+    public static synchronized boolean createOrderFile(List<String> order) {
+        File directory = new File(dataDirectoryPath
+                + File.separator + "order" + File.separator);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        int solt = 1;
+        Path file = Paths.get(directory + File.separator +
+                new SimpleDateFormat("yyyy_MM_dd HH-mm").format(Calendar.getInstance().getTime()) + ".csv");
+        while (Files.exists(file)) {
+            file = Paths.get(directory + File.separator +
+                    new SimpleDateFormat("yyyy_MM_dd HH-mm").format(Calendar.getInstance().getTime()) + "_" + solt + ".csv");
+            solt++;
+        }
+        try {
+            Files.write(file, order, Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            System.err.println("Can not create order file. Give the program access to the directory "
+                    + Servise.dataDirectoryPath + " or change data directory.");
+            return false;
+        }
+        return true;
     }
 }
