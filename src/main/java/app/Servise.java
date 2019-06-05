@@ -39,8 +39,8 @@ public class Servise {
             try {
                 new File(dataDirectoryPath + File.separator + ITEMS_FILE).createNewFile();
             } catch (IOException e) {
-                System.err.println("Can not crate file " + dataDirectoryPath + File.separator + ITEMS_FILE+". " +
-                        "Please create it yourself");
+                System.err.println("Cannot create file " + dataDirectoryPath + File.separator + ITEMS_FILE+". " +
+                        "No access.  Please create it yourself.");
             }
         }
 
@@ -51,13 +51,13 @@ public class Servise {
 
             if (itemsList.isEmpty()) {
                 System.err.println("No data in \"" + directory + File.separator + "items.csv" + "\". " +
-                        "The file is initialized by default");
+                        "The file is initialized by default.");
                 itemsList = setDefaultValueInItemsFile(dataDirectoryPath + File.separator + ITEMS_FILE);
             }
         } catch (FileNotFoundException e) {
             System.err.println("Missing file with product list. Check for file \""
                     + dataDirectoryPath + File.separator + ITEMS_FILE + "\". " +
-                    "Or change the data directory as described in README file");
+                    "Or change the data directory as described in README file.");
         }
         for (String str : itemsList) {
             try {

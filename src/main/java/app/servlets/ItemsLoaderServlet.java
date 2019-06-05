@@ -42,9 +42,10 @@ public class ItemsLoaderServlet extends HttpServlet {
         }
 
         if (!Files.exists(Paths.get(directoryPath))) {
-            directoryPath = System.getenv("CATALINA_HOME") +
-                    File.separator + "webapps" + File.separator + "data";
+            directoryPath = System.getenv("CATALINA_BASE") + File.separator + "data";
         }
+
+        System.out.println("Directory for data is defined "+directoryPath+".");
 
         initColllection(directoryPath);
         String finalDirectoryPath = directoryPath;
