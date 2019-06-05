@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -26,21 +27,25 @@ public class BuyserviceServlet extends HttpServlet {
         if (Servise.validate(req.getParameter("desiredProduct")).isEmpty()) {
             List<String> order = Servise.orderList(goodsArticl);
             File directory = new File(Servise.dataDirectoryPath
-                    +File.separator+"order"+File.separator);
+                    + File.separator + "order" + File.separator);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
             int solt = 1;
             synchronized (this) {
-                Path file = Paths.get(directory +File.separator+
+                Path file = Paths.get(directory + File.separator +
                         new SimpleDateFormat("yyyy_MM_dd HH-mm").format(Calendar.getInstance().getTime()) + ".csv");
-                while (Files.exists(file)){
-                    file = Paths.get(directory +File.separator+
-                            new SimpleDateFormat("yyyy_MM_dd HH-mm").format(Calendar.getInstance().getTime()) + "_"+solt+".csv");
+                while (Files.exists(file)) {
+                    file = Paths.get(directory + File.separator +
+                            new SimpleDateFormat("yyyy_MM_dd HH-mm").format(Calendar.getInstance().getTime()) + "_" + solt + ".csv");
                     solt++;
                 }
                 try {
                     Files.write(file, order, Charset.forName("UTF-8"));
+                } catch (NoSuchFileException ex) {
+                    System.err.println("Can not create order file. Give the program access to the directory "
+                            +Servise.dataDirectoryPath+" or change data directory.");
+                    resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
                 } catch (IOException e) {
                     resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
                     e.printStackTrace();
