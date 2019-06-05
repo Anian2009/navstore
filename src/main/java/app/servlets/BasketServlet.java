@@ -13,6 +13,6 @@ public class BasketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/plain");
-        resp.getWriter().write(String.valueOf(Servise.validate(req.getParameter("desiredProduct"))));
+        resp.getWriter().write(String.valueOf(Servise.validateArticl(req.getParameter("desiredProduct"))));
     }
 }

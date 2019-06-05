@@ -21,13 +21,13 @@ public class Servise {
     private static final String ITEMS_FILE = "items.csv";
 
 
-    public static List<String> validate(String good) {
+    public static List<String> validateArticl(String good) {
         List<String> articlList = Model.getInstance().getList().stream().map(Item::getPassword).collect(Collectors.toList());
         List<String> desiredProducts = Arrays.asList(good.split(","));
         return desiredProducts.stream().filter(s -> !articlList.contains(s)).collect(Collectors.toList());
     }
 
-    public static List<String> orderList(List<String> articl) {
+    public static List<String> getOrderList(List<String> articl) {
         return Model.getInstance().getList().stream()
                 .filter(item -> articl.contains(item.getPassword()))
                 .map(item -> item.getName() + ", " + item.getPassword() + ", " + item.getPrice() + ";")

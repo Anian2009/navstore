@@ -24,8 +24,8 @@ public class BuyserviceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
         List<String> goodsArticl = Arrays.asList(req.getParameter("desiredProduct").split(","));
 
-        if (Servise.validate(req.getParameter("desiredProduct")).isEmpty()) {
-            List<String> order = Servise.orderList(goodsArticl);
+        if (Servise.validateArticl(req.getParameter("desiredProduct")).isEmpty()) {
+            List<String> order = Servise.getOrderList(goodsArticl);
             if (Servise.createOrderFile(order)) {
                 resp.setStatus(HttpServletResponse.SC_CREATED);
             } else {
