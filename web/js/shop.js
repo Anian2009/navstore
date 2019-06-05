@@ -59,15 +59,12 @@ $(document).ready(function () {
                 },
                 error: function(xhr) {
                     window.location = "./shop/failure";
-                    // if(xhr.status===400){
-                    //     window.location = "./shop/failure";
-                    // } else{
-                    //     alert(xhr.status+" - "+xhr.message);
-                    // }
                 },
                 success: function(data, textStatus, xhr) {
                     if(xhr.status ===201){
                         window.location = "./shop/success"
+                    } else {
+                        window.location = "./shop/failure";
                     }
                 }
             });
