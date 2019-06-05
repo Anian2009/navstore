@@ -58,11 +58,12 @@ $(document).ready(function () {
                     "desiredProduct":desiredProduct
                 },
                 error: function(xhr) {
-                    if(xhr.status===400){
-                        window.location = "./shop/failure";
-                    } else{
-                        alert(xhr.status+" - "+xhr.message);
-                    }
+                    window.location = "./shop/failure";
+                    // if(xhr.status===400){
+                    //     window.location = "./shop/failure";
+                    // } else{
+                    //     alert(xhr.status+" - "+xhr.message);
+                    // }
                 },
                 success: function(data, textStatus, xhr) {
                     if(xhr.status ===201){
