@@ -46,6 +46,7 @@ public class BuyserviceServlet extends HttpServlet {
                     System.err.println("Can not create order file. Give the program access to the directory "
                             +Servise.dataDirectoryPath+" or change data directory.");
                     resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
+                    return;
                 } catch (IOException e) {
                     resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
                     e.printStackTrace();

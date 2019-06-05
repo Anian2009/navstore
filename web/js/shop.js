@@ -63,8 +63,6 @@ $(document).ready(function () {
                 success: function(data, textStatus, xhr) {
                     if(xhr.status ===201){
                         window.location = "./shop/success"
-                    } else {
-                        window.location = "./shop/failure";
                     }
                 }
             });
