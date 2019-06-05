@@ -18,7 +18,6 @@
         <element id="file-copy" path="$PROJECT_DIR$/target/navstore/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="navstore/web/Web" />
-      <element id="file-copy" path="$PROJECT_DIR$/config.properties" />
     </root>
   </artifact>
 </component>
