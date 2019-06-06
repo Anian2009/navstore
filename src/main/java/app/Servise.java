@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Servise {
-    public static String dataDirectoryPath;
+    private static String dataDirectoryPath;
     private static final String ITEMS_FILE = "items.csv";
 
 
@@ -45,7 +45,7 @@ public class Servise {
                 new File(dataDirectoryPath + File.separator + ITEMS_FILE).createNewFile();
             } catch (IOException e) {
                 System.err.println("Cannot create file " + dataDirectoryPath + File.separator + ITEMS_FILE + ". " +
-                        "No access.  Please create it yourself.");
+                        "No access.  Please create it yourself or change the data directory as described in README file.");
             }
         }
 

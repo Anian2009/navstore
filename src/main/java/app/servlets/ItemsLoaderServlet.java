@@ -19,7 +19,7 @@ import java.util.TimerTask;
 
 import static app.Servise.initColllection;
 
-//@WebServlet("/shop/items")
+
 public class ItemsLoaderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,9 +45,13 @@ public class ItemsLoaderServlet extends HttpServlet {
         }
 
         if (!Files.exists(Paths.get(directoryPath))) {
+            System.out.println("User is not defined data directory.");
             directoryPath = System.getProperty("CATALINA_BASE");
-            if (directoryPath == null)
+            if (directoryPath == null){
+                System.out.println("The program can not determine the data directory using \"CATALINA_BASE\".");
                 directoryPath = System.getProperty("user.home", "/");
+            }
+
         }
 
         System.out.println("Directory for data is defined \"" + directoryPath + File.separator + "data\". " +
