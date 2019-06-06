@@ -15,6 +15,15 @@ By default, the directory of data for your application is located at the root of
  - create file "items.csv" in your directory and fill it data;
  - restart your application;
 
+- ### Exeption: "No properties file."
+
+ Сreate a "config.properties" file in the root application with the following content
+    
+    boot.file.path=/data
+
+ Instead of '/ data' you can specify the directory where you want to place the data
+
+
 - ### initializing "data/items.csv" file
 
  After first launch and visiting page "navstore/shop" there are created a file "data/items.csv" which initializing default values

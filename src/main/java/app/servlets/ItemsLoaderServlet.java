@@ -31,6 +31,8 @@ public class ItemsLoaderServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+        System.out.println(System.getenv());
+        System.out.println();
         String directoryPath = null;
         Properties properties = new Properties();
 
@@ -38,14 +40,23 @@ public class ItemsLoaderServlet extends HttpServlet {
             properties.load(config.getServletContext().getResourceAsStream("config.properties"));
             directoryPath = properties.getProperty("boot.file.path");
         } catch (Exception e) {
-            System.err.println("No data in properties file.");
+            System.err.println("No properties file. How to solve this problem see In the README file.");
         }
 
+//        if (!Files.exists(Paths.get(directoryPath))) {
+//            directoryPath = System.getenv("CATALINA_BASE") + File.separator + "data";
+//        }
         if (!Files.exists(Paths.get(directoryPath))) {
-            directoryPath = System.getenv("CATALINA_BASE") + File.separator + "data";
+            directoryPath = System.getenv("CATALINA_BASE");
+            if (directoryPath == null)
+                directoryPath = System.getenv("CATALINA_HOME");
+            if (directoryPath == null)
+                directoryPath = System.getProperty("user.home");
+            else
+                directoryPath = "/data";
         }
 
-        System.out.println("Directory for data is defined "+directoryPath+".");
+        System.out.println("Directory for data is defined "+directoryPath+". How change data directory see in README file.");
 
         initColllection(directoryPath);
         String finalDirectoryPath = directoryPath;
