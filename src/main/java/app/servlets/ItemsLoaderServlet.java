@@ -45,13 +45,9 @@ public class ItemsLoaderServlet extends HttpServlet {
         }
 
         if (!Files.exists(Paths.get(directoryPath))) {
-            directoryPath = System.getenv("CATALINA_BASE");
+            directoryPath = System.getProperty("CATALINA_BASE");
             if (directoryPath == null)
-                directoryPath = System.getenv("CATALINA_HOME");
-            if (directoryPath == null)
-                directoryPath = System.getProperty("user.home");
-            if (directoryPath == null)
-                directoryPath = "/";
+                directoryPath = System.getProperty("user.home", "/");
         }
 
         System.out.println("Directory for data is defined \"" + directoryPath + File.separator + "data\". " +
