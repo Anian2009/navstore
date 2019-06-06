@@ -8,11 +8,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.List;
+import java.util.Properties;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static app.Servise.initColllection;
 
@@ -31,8 +34,6 @@ public class ItemsLoaderServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        System.out.println(System.getenv());
-        System.out.println();
         String directoryPath = null;
         Properties properties = new Properties();
 
@@ -43,35 +44,25 @@ public class ItemsLoaderServlet extends HttpServlet {
             System.err.println("No properties file. How to solve this problem see In the README file.");
         }
 
-//        if (!Files.exists(Paths.get(directoryPath))) {
-//            directoryPath = System.getenv("CATALINA_BASE") + File.separator + "data";
-//        }
-        System.out.println("directoryPath from properties ="+directoryPath);
         if (!Files.exists(Paths.get(directoryPath))) {
             directoryPath = System.getenv("CATALINA_BASE");
-            System.out.println("directoryPath from base ="+directoryPath);
-            if (directoryPath == null){
+            if (directoryPath == null)
                 directoryPath = System.getenv("CATALINA_HOME");
-                System.out.println("directoryPath from home ="+directoryPath);
-            }
-            if (directoryPath == null){
+            if (directoryPath == null)
                 directoryPath = System.getProperty("user.home");
-                System.out.println("directoryPath from user.home ="+directoryPath);
-            }
-            if (directoryPath == null){
-                directoryPath = "/data";
-                System.out.println("directoryPath from default ="+directoryPath);
-            }
+            if (directoryPath == null)
+                directoryPath = "/";
         }
 
-        System.out.println("Directory for data is defined "+directoryPath+". How change data directory see in README file.");
+        System.out.println("Directory for data is defined \"" + directoryPath + File.separator + "data\". " +
+                "How change data directory see in README file.");
 
-        initColllection(directoryPath);
+        initColllection(directoryPath + File.separator + "data");
         String finalDirectoryPath = directoryPath;
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                initColllection(finalDirectoryPath);
+                initColllection(finalDirectoryPath + File.separator + "data");
             }
         };
         new Timer().schedule(timerTask, 300000, 300000);
