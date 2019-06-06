@@ -10,7 +10,7 @@ By default, the directory of data for your application is located at the root of
  - in the file "navstore.properties" at the root of the application you should write new directory. For example:
 
 
-    boot.file.path=c:\\My\\new\\directory
+    boot.file.path=/My/new/directory
 
  - create file "items.csv" in your directory and fill it data;
  - restart your application;

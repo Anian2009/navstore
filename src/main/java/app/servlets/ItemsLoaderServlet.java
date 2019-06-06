@@ -46,14 +46,22 @@ public class ItemsLoaderServlet extends HttpServlet {
 //        if (!Files.exists(Paths.get(directoryPath))) {
 //            directoryPath = System.getenv("CATALINA_BASE") + File.separator + "data";
 //        }
+        System.out.println("directoryPath from properties ="+directoryPath);
         if (!Files.exists(Paths.get(directoryPath))) {
             directoryPath = System.getenv("CATALINA_BASE");
-            if (directoryPath == null)
+            System.out.println("directoryPath from base ="+directoryPath);
+            if (directoryPath == null){
                 directoryPath = System.getenv("CATALINA_HOME");
-            if (directoryPath == null)
+                System.out.println("directoryPath from home ="+directoryPath);
+            }
+            if (directoryPath == null){
                 directoryPath = System.getProperty("user.home");
-            else
+                System.out.println("directoryPath from user.home ="+directoryPath);
+            }
+            if (directoryPath == null){
                 directoryPath = "/data";
+                System.out.println("directoryPath from default ="+directoryPath);
+            }
         }
 
         System.out.println("Directory for data is defined "+directoryPath+". How change data directory see in README file.");
