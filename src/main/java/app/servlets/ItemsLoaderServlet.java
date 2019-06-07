@@ -42,29 +42,49 @@ public class ItemsLoaderServlet extends HttpServlet {
             directoryPath = properties.getProperty("boot.file.path");
         } catch (Exception e) {
             System.err.println("No properties file. How to solve this problem see In the README file.");
-        }
-
-        if (!Files.exists(Paths.get(directoryPath))) {
+        } finally {
             System.out.println("User is not defined data directory.");
-            directoryPath = System.getProperty("CATALINA_BASE");
+            directoryPath = System.getProperty("catalina.base");
             if (directoryPath == null){
                 System.out.println("The program can not determine the data directory using \"CATALINA_BASE\".");
                 directoryPath = System.getProperty("user.home", "/");
             }
 
+            System.out.println("Directory for data is defined \"" + directoryPath + File.separator + "data\". " +
+                    "How change data directory see in README file.");
+
+            initColllection(directoryPath + File.separator + "data");
+            String finalDirectoryPath = directoryPath;
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    initColllection(finalDirectoryPath + File.separator + "data");
+                }
+            };
+            new Timer().schedule(timerTask, 300000, 300000);
         }
 
-        System.out.println("Directory for data is defined \"" + directoryPath + File.separator + "data\". " +
-                "How change data directory see in README file.");
-
-        initColllection(directoryPath + File.separator + "data");
-        String finalDirectoryPath = directoryPath;
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                initColllection(finalDirectoryPath + File.separator + "data");
-            }
-        };
-        new Timer().schedule(timerTask, 300000, 300000);
+//        if (!Files.exists(Paths.get(directoryPath))) {
+//            System.out.println("User is not defined data directory.");
+//            directoryPath = System.getProperty("catalina.base");
+//            if (directoryPath == null){
+//                System.out.println("The program can not determine the data directory using \"CATALINA_BASE\".");
+//                directoryPath = System.getProperty("user.home", "/");
+//            }
+//
+//        }
+//
+//        System.out.println("Directory for data is defined \"" + directoryPath + File.separator + "data\". " +
+//                "How change data directory see in README file.");
+//
+//        initColllection(directoryPath + File.separator + "data");
+//        String finalDirectoryPath = directoryPath;
+//        TimerTask timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                initColllection(finalDirectoryPath + File.separator + "data");
+//            }
+//        };
+//        new Timer().schedule(timerTask, 300000, 300000);
     }
 }
