@@ -40,10 +40,11 @@ public class ItemsLoaderServlet extends HttpServlet {
         try {
             properties.load(config.getServletContext().getResourceAsStream("config.properties"));
             directoryPath = properties.getProperty("boot.file.path");
+            System.out.println("User set data directory - "+directoryPath);
         } catch (Exception e) {
             System.err.println("No properties file. How to solve this problem see In the README file.");
         } finally {
-            System.out.println("User is not defined data directory.");
+            System.out.println("User is not defined data directory or input incorrect path.");
             directoryPath = System.getProperty("catalina.base");
             if (directoryPath == null){
                 System.out.println("The program can not determine the data directory using \"CATALINA_BASE\".");
